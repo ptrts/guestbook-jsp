@@ -1,0 +1,48 @@
+.parent {
+	border: 1px solid #B3AC86;
+	padding: 5px;
+	margin: 5px;
+
+	background-color: #F5F2DD;
+}
+
+.parent {
+	position: relative;
+}
+
+.message-form {
+	background-color: white;
+	position: fixed;
+	right: 3px;
+	top: 3px;
+	width: 50%;
+}
+
+.date {
+	display: inline-block;
+
+	position: absolute;
+	right: 10px;
+}
+
+.user {
+	display: inline-block;
+	font-weight: bold;
+	font-size: 16px;
+
+	position: relative;
+	left: 5px;
+}
+
+.text {
+	border: 1px solid #B3AC86;
+	padding: 5px;
+	margin: 5px;
+
+	background-color: floralwhite;
+}
+
+.clear-both {
+	clear:both;
+	border:none;
+}
