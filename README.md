@@ -1,4 +1,7 @@
+Сначала в MySQL надо сделать такие запросы:
+
 CREATE TABLE IF NOT EXISTS posts (
+
 	id       INT           NOT NULL AUTO_INCREMENT,
 	message  TEXT          NOT NULL,
 	postDate TIMESTAMP     NOT NULL,
