@@ -19,9 +19,9 @@
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
-    <orderEntry type="library" name="jstl:jstl:1.2" level="project" />
     <orderEntry type="library" name="Tomcat" level="project" />
-    <orderEntry type="library" name="MySQL Connector 5.1.25" level="application" />
+    <orderEntry type="library" name="MySQL connector 5.1.25" level="project" />
+    <orderEntry type="library" name="jstl:jstl:1.2" level="project" />
   </component>
 </module>
 

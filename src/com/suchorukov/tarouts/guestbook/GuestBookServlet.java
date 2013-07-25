@@ -1,20 +1,25 @@
 package com.suchorukov.tarouts.guestbook;
 
+import javax.annotation.Resource;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.sql.DataSource;
 import java.io.IOException;
 import java.sql.SQLException;
 
 @WebServlet("/guestbook")
 public class GuestBookServlet extends javax.servlet.http.HttpServlet {
 
+	@Resource(name = "JDBC/GuestBook")
+	private DataSource ds;
+
 	private GuestBookController getController() throws SQLException, ClassNotFoundException {
 		GuestBookController controller = (GuestBookController) getServletContext().getAttribute("controller");
 		if (controller == null) {
-			controller = new GuestBookControllerImpl();
+			controller = new GuestBookControllerImpl(ds);
 			getServletContext().setAttribute("controller", controller);
 		}
 		return controller;

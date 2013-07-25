@@ -1,13 +1,16 @@
 package com.suchorukov.tarouts.guestbook;
 
-import java.sql.*;
+import javax.sql.DataSource;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.util.LinkedList;
 import java.util.List;
 
 public class GuestBookControllerImpl implements GuestBookController {
 
-	private Connection connection;
+	private DataSource ds;
 
 	@Override
 	public void addRecord(String userName, String message) throws SQLException {
@@ -17,7 +20,7 @@ public class GuestBookControllerImpl implements GuestBookController {
 		try {
 			Timestamp postDate = new Timestamp(System.currentTimeMillis());
 
-			preparedStatement = connection.prepareStatement(
+			preparedStatement = ds.getConnection().prepareStatement(
 					"INSERT INTO " +
 							"posts (message, postDate, userName) " +
 							"VALUES (?, ?, ?)"
@@ -35,19 +38,21 @@ public class GuestBookControllerImpl implements GuestBookController {
 		}
 	}
 
+	public GuestBookControllerImpl(DataSource ds) {
+		this.ds = ds;
+	}
+
 	@Override
 	public List<Record> getRecords() throws SQLException {
 
 		PreparedStatement preparedStatement = null;
 
 		try {
-			preparedStatement = connection.prepareStatement(
+			preparedStatement = ds.getConnection().prepareStatement(
 					"SELECT id, message, postDate, userName FROM posts AS posts"
 			);
 
 			ResultSet resultSet = preparedStatement.executeQuery();
-
-			resultSet.beforeFirst();
 
 			List<Record> list = new LinkedList<>();
 
@@ -67,26 +72,6 @@ public class GuestBookControllerImpl implements GuestBookController {
 			if (preparedStatement != null) {
 				preparedStatement.close();
 			}
-		}
-	}
-
-	public GuestBookControllerImpl() throws ClassNotFoundException, SQLException {
-		connection = null;
-		try {
-			Class.forName("com.mysql.jdbc.Driver");
-			connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/guestbook", "app", "app");
-		} catch (SQLException e) {
-			if (connection != null) {
-				connection.close();
-			}
-			throw e;
-		}
-	}
-
-	@Override
-	public void close() throws Exception {
-		if (connection != null) {
-			connection.close();
 		}
 	}
 }

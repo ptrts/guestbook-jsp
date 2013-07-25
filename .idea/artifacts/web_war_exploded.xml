@@ -8,8 +8,9 @@
           <element id="module-output" name="guestbook-jsp" />
         </element>
         <element id="directory" name="lib">
-          <element id="library" level="project" name="jstl:jstl:1.2" />
           <element id="library" level="application" name="MySQL Connector 5.1.25" />
+          <element id="library" level="project" name="MySQL connector 5.1.25" />
+          <element id="library" level="project" name="jstl:jstl:1.2" />
         </element>
       </element>
     </root>
